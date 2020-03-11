@@ -3,13 +3,13 @@ Built an ecommerce site to demonstrate/study/learn Spring MVC framework.
 (update) working on tests and finalising functionality for checkout. 
 Advice is welcome! :)
 
-#To get the code:
+To get the code:
 Clone the repository:
 
 $ git clone git://github.com/mariagutierrezm/ecommerceProject.git
 If this is your first time using Github, This is a useful link to learn basic features https://help.github.com.
 
-#To run the application:
+To run the application:
 From the command line with Maven:
 
 $ cd ecommerceProject
