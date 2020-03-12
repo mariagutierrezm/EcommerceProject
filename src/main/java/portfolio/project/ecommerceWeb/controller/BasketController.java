@@ -1,11 +1,14 @@
 package portfolio.project.ecommerceWeb.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,17 +43,23 @@ public class BasketController {
 	
 	@PostMapping("addToBasket")
 	public ModelAndView addToBasket(@RequestParam("productID") long productID, @RequestParam("quantity") int quantity,
-			ModelAndView modelAndView, HttpSession session) {
+			ModelAndView modelAndView, HttpSession session //, @ModelAttribute("product") Products products
+			) {
 		User userfromDB = (User) session.getAttribute(USER_SESSION);
 		Products productsDB = productsService.findById(productID).get();
 		int stock = productsDB.getQuantity();
+//		List<Products> filteredProducts = productsService.filterByType(userfromDB, products.getTypeOfProduct());
 
 		if (stock != 0) {
+//			if (products == filteredProducts) {
 			Basket basketDB = basketService.addProductToBasket(userfromDB, productsDB, quantity);
 			modelAndView.addObject("basket", basketDB);
 			modelAndView.addObject("successMessage", "The product has been added to your basket");
 //			modelAndView.addObject("user", userfromDB);
 			logger.info("Success basket Saved " + basketDB);
+//			} else {
+//				
+//			}
 		} else {
 			modelAndView.addObject("errorMessage", "Sorry we are currently out of stock on this product");
 		}
