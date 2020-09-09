@@ -16,4 +16,4 @@ $ cd ecommerceProject
 
 $ mvn jetty:run 
 
-Access the deployed web application at: http://localhost:8080/ecommerceProject/
+Access the deployed web application at: http://localhost:8080/ecommerceWeb/
