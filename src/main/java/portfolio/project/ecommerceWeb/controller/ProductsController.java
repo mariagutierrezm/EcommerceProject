@@ -2,6 +2,7 @@ package portfolio.project.ecommerceWeb.controller;
 
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,9 +39,12 @@ public class ProductsController {
 	public ModelAndView products(@ModelAttribute("product") Products product, @ModelAttribute("user") User user,
 			HttpSession session, ModelAndView modelAndView) {
 		User userfromDB = (User) session.getAttribute(USER_SESSION);
+		Optional<User> userDB = userService.getByUsername(user.getUsername());
+		if(userDB.isPresent()) {
+			modelAndView.addObject(userService.getById(userfromDB.getId()).get());
+		} 
 		modelAndView.addObject("typeOfProduct", EnumSet.allOf(TypeOfProduct.class));
 		modelAndView.addObject("products", productsService.retrieveAll());
-		modelAndView.addObject(userService.getById(userfromDB.getId()).get());
 		modelAndView.setViewName("WEB-INF/products");
 		return modelAndView;
 
@@ -50,9 +54,12 @@ public class ProductsController {
 	public ModelAndView filterProducts(@ModelAttribute("product") Products products, ModelAndView modelAndView,
 			@ModelAttribute("user") User user, HttpSession session) {
 		User userfromDB = (User) session.getAttribute(USER_SESSION);
+		Optional<User> userDB = userService.getByUsername(user.getUsername());
+		if(userDB.isPresent()) {
+			modelAndView.addObject(userService.getById(userfromDB.getId()).get());
+		}
 		List<Products> filteredProducts = productsService.filterByType(userfromDB, products.getTypeOfProduct());
 		modelAndView.addObject("products", filteredProducts);
-		modelAndView.addObject(userService.getById(userfromDB.getId()).get());
 		modelAndView.setViewName("WEB-INF/products");
 		return modelAndView;
 	}

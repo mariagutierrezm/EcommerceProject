@@ -24,6 +24,9 @@
 		                   </div>
 		                   <br>
 		                   <button type="submit" class="btn btn-info shadow">Login</button>
+		                   <a href="register">
+                      		<button type="submit" class="btn btn-info shadow">Register</button>
+                      		</a>
 		               </form>
 		        </div>
 		   </div>

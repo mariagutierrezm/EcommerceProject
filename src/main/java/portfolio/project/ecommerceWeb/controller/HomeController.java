@@ -31,11 +31,16 @@ public class HomeController {
 	public static String getUserSession() {
 		return USER_SESSION;
 	}
-
+	
 	@GetMapping("/")
-	private ModelAndView start(ModelAndView modelAndView) {
-		return new ModelAndView("home");
+	public String homeShop() {
+		return "WEB-INF/homeShop";
 	}
+
+//	@GetMapping("/")
+//	private ModelAndView start(ModelAndView modelAndView) {
+//		return new ModelAndView("home");
+//	}
 
 	@GetMapping("login")
 	private ModelAndView login(ModelAndView modelAndView) {

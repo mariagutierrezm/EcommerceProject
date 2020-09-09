@@ -23,7 +23,13 @@
 
 <body>
 	<div class="topnav">
-		<h2>${ user.username }</h2>
+		<c:choose>
+		    <c:when test="${user.username == ''}">
+		    </c:when>    
+		    <c:otherwise>
+		    	<h2>${ user.username }</h2>
+		    </c:otherwise>
+	    </c:choose>
 			<a href="userShop">Home</a>
 			<a href="products">Products</a>
 			<a href="basket">Basket</a>
